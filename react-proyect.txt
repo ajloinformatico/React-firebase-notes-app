@@ -1,0 +1,77 @@
+ACTUALIZAR NODE
+npm install -g n
+n latest
+
+
+
+CREAR UN PROYECTO EN REACT LLAMADO my-app
+npx create-react-app my-app
+
+EN LA CARPETA ABRE LA APLICACIÓN CON VISUAL
+code .
+
+
+
+INSTALAR EXTENSIONES
+ES7 React/Redux/React-Native/JS snippets
+Firebase Snippets
+generate-react-component
+React/Redux/react-router Snippets
+Reactjs code snippets
+Simple React Snippets
+vscode-icons
+
+
+npm start 
+
+LIMPIAR LA APLICACIÓN
+
+Dejar el App.js vacío 
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Lo que sea</h1>
+      </header>
+    </div>
+  );
+}
+export default App;
+
+
+Dejar solo tres archivos de inicio en 
+
+src App.js index.js index.css
+
+
+
+
+Los componentes siempre empiezan por mayusculas para diferenciar de las etiquetas html
+
+
+Race => estructura del componente
+
+
+
+
+
+Las rutas para mensajería asíncrona es necesario instalar 
+
+routing npm install react-router-dom
+
+Hacer el ppm start y importar de https://reactrouter.com/web/guides/quick-start esto -->
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+
+
+
+
+
+
+
+---------------------------------
