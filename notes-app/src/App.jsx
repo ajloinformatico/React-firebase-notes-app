@@ -37,7 +37,7 @@ function App() {
             <Route path='/login'><Login/></Route>
             <Route path="/reset"><Reset/></Route>
             <Route path="/notes"><Notes/></Route>
-            <Route path="/" exact>Inicio</Route>
+            <Route path="/" exact><Notes/></Route>
           </Switch>
         </div>
       </Router>   

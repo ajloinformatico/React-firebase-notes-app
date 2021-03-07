@@ -5,9 +5,6 @@ import NotesCrud from './NotesCrud'
 
 const Notes = (props) => {
     const [user, setUser] = useState(null);
-    const [notes, setNotes] = useState([]);
-    const [note, setNote] =  useState("");
-    const [error, setError] = useState(null);
     
     
     useEffect(() => {
