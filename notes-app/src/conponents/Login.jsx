@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {db, auth} from '../firebase'
-import {withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -46,7 +46,7 @@ const Login = (props) => {
             setEmail("");
             setPass("");
             setError(null);
-            //props.history.push('/notes') //on notes check user to redirect login or show crud
+            props.history.push('/notes') //on notes check user to redirect login or show crud
         }catch(error){
             //console.log(error)
             if(error.code==="auth/invalid-email"){
@@ -69,10 +69,10 @@ const Login = (props) => {
             setEmail("");
             setPass("");
             setError(null);
-            //props.history.push('/admin') //on notes check user to redirect login or show crud
+            props.history.push('/notes') //on notes check user to redirect login or show crud
         }catch(error){
             if(error.code==="auth/user-not-found"||error.code==="auth/wrong-password"){
-                setError("Email or password or bouth are incorrect");
+                setError("Email or/and password are incorrect");
             }
         }
     }
@@ -118,11 +118,14 @@ const Login = (props) => {
                             {isRegister? "Do you already have an account?":"Don't have an account yet?"} 
                         </button>
                         {/*if is register is false or if state is on login show button for recover password*/}
-                        <button className="btn btn-danger btm-sm" type="button"
-                            onClick={()=>props.history.push('/reset')}
-                        >
-                            Recover password
-                        </button>
+                        
+                        {!isRegister && ( 
+                                <button className="btn btn-danger btm-sm" type="button"
+                                    onClick={()=>props.history.push('/reset')}>
+                                    Recover password
+                                </button>
+                            )
+                        }
                     </form>
                 </div>
             </div>
@@ -130,4 +133,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default withRouter(Login);

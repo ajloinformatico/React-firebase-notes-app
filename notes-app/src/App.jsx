@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
+import {auth} from './firebase'
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
-import NotesCrud from './conponents/NotesCrud'; //Crud commponent
 import NavBar from './conponents/NavBar'; //nav
 import Login from './conponents/Login'; //login
 import Notes from './conponents/Notes' //ADMIN
@@ -14,31 +13,35 @@ import Reset from './conponents/Reset'; //reset
 
 
 function App() {
+
+  //UserState
+  const [firebaseuser, setFirebaseuser] = useState(false)
+
+  //check user to save on a state current user
+  useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+      if (user) {
+        setFirebaseuser(user)
+        console.log("hay usuario")
+      } else {
+        setFirebaseuser(null)
+      }
+    });
+  }, [])
   
-  return (
+  return ( firebaseuser !== false && (
       <Router>
         <div className="container">
-          <NavBar/>
+          <NavBar firebaseuser={firebaseuser}/> {/*Send firebase user by props*/}
           <Switch>
-          <Route path="/login" exact>
-            <Login/>
-          </Route>
-          <Route path="/reset" exact>
-            <Reset/>
-          </Route>
-          <Route path="/notes" exact>
-            <Notes/>
-          </Route>
-          <Route path="/" exact>
-            Inicio
-          </Route>
+            <Route path='/login'><Login/></Route>
+            <Route path="/reset"><Reset/></Route>
+            <Route path="/notes"><Notes/></Route>
+            <Route path="/" exact>Inicio</Route>
           </Switch>
         </div>
-        <Login/>
-      </Router>
-      
-      
-  );
+      </Router>   
+  ));
 }
 
 export default App;

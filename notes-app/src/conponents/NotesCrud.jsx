@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react';
 import '../App.css';
 import {firebase} from '../firebase';
 
-const NotesCrud = () => {
+const NotesCrud = (props) => {
 
     const [notes, setNotes] = useState([]);
     const [note, setNote] =  useState("");
     const [error, setError] = useState(null);
   
+
+
+
+
     useEffect (()=>{
         //All this type funcions must be async
         /**
@@ -65,6 +69,9 @@ const NotesCrud = () => {
         }
     }
 
+
+
+
     /**
     * delete a note by id
     * @param {note.id} id: note id to delete
@@ -74,7 +81,7 @@ const NotesCrud = () => {
             const db = firebase.firestore()
             const data = await db.collection('notes').doc(id).delete();
             //filter array of notes to reload all data
-            const arrayFilter = notes.filter(item => item.id!==id); //delete all null data
+            const arrayFilter = notes.filter(item => item.id===null); //delete all null data
             setNotes(arrayFilter);
 
         }catch(error){
@@ -84,6 +91,7 @@ const NotesCrud = () => {
 
     return (
         <div className="container mt-4">
+        <p>Welcome <b>{props.user}</b></p>
         <h2 className="text-center">React Notes App</h2>
           <div className="row mt-2">
             <div className="col-7">
