@@ -103,7 +103,7 @@ ___
 ## Deplyment 📦
 _Just open web app on your browser_ 🤓 .
 ```
-https://thirsty-lichterman-8708ba.netlify.app/
+https://react-firebase-notes-app.netlify.app
 ```
 ![live](./img/live.png)
 
