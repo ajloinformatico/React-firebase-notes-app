@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
 import {firebase} from '../firebase';
+import moment from 'moment';
 
 const NotesCrud = (props) => {
 
@@ -97,7 +98,8 @@ const NotesCrud = (props) => {
 
         const db = firebase.firestore();
         const data = await db.collection('notes').doc(id).update({
-          name: note
+          name: note,
+          date: Date.now()
         });
 
         const arrayUpdated = notes.map(
@@ -145,7 +147,7 @@ const NotesCrud = (props) => {
                 { //print list of notes
                   notes.map(item =>
                   <li className="list-group-item" key={item.id}>{/*the key is necessary to avoid warnings*/}
-                    <span>{item.name}</span>
+                    <span>{item.name + " - " + moment(item.date).format("DD/MM/YYYY")}</span>
                     {/*delete and update buttons*/}
                     <button className="btn btn-danger float-end mx-2" onClick={() => deleteNote(item.id)}>Delete</button> {/*on click delete a note by id*/}
                     <button className="btn btn-warning float-end" onClick={() => activateEditMode(item)}>Update</button>
