@@ -36,7 +36,11 @@ const NotesCrud = (props) => {
             }
         }
         getData()
-    }, [])
+    }, [props])
+
+
+
+    
 
     /**
     * send and save note into firebase archive
@@ -56,19 +60,22 @@ const NotesCrud = (props) => {
             name:note,
             date:Date.now()
         }
+        
         //save into notes archive
-        const data = db.collection('notes').add(newNote);
-        //setNotes with data to show on list new Note
-        setNotes([
-            ...notes,
-            {id:data.id, ...newNote}
-        ]); 
+        db.collection('notes').add(newNote);
+        //setNotes with data to show on list new Not
         //Set values by default
+        const data = await db.collection('notes').get(); //get notes collection
+                //MAP ON ARRAY DATA TO USE AGREGATION
+                const arrayData = data.docs.map( doc => (
+                {id:doc.id, ...doc.data()}
+        ));
+        setNotes(arrayData);
         setNote("")
         setError(null);
 
         } catch(error) {
-            setError(error);
+            console.log(error);
         }
     }
 
@@ -80,8 +87,6 @@ const NotesCrud = (props) => {
       setEditMode(true);
       setNote(item.name);
       setId(item.id);
-      console.log(note);
-      console.log(id);
     }
 
     /**
@@ -95,13 +100,12 @@ const NotesCrud = (props) => {
         return
       }
       try{
-
         const db = firebase.firestore();
-        const data = await db.collection('notes').doc(id).update({
+        db.collection('notes').doc(id).update({
           name: note,
           date: Date.now()
         });
-
+        
         const arrayUpdated = notes.map(
           item => item.id === id?{id:id,name:note}:item
         )
@@ -111,7 +115,7 @@ const NotesCrud = (props) => {
         setId("");
         setError(null);
       }catch(error){
-        setError(error);
+        console.log(error);
       }
     }
 

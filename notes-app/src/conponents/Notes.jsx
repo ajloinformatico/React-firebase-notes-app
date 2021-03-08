@@ -8,12 +8,9 @@ const Notes = (props) => {
     
     
     useEffect(() => {
-        console.log("entro")
         if (auth.currentUser) {
-            console.log("hay usuario");
             setUser(auth.currentUser);
         }else{
-            console.log("no hay usuario");
             props.history.push('/login');
         }
     },  [props])

@@ -22,7 +22,6 @@ function App() {
     auth.onAuthStateChanged(user=>{
       if (user) {
         setFirebaseuser(user)
-        console.log("hay usuario")
       } else {
         setFirebaseuser(null)
       }
