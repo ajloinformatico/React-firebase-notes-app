@@ -27,7 +27,7 @@ __the app is divided into components located in components managed by app.jsx th
   * The central node is **App.jsx** checks if user exists and all routes and auth components are loaded
     the crud of the notes is loaded into the notes component once it is verified that a user exists .
 
-    ![Aopp.jsx](./img/app.png)
+    ![App.jsx](./img/app.png)
 
 * ***Auth:***
   *  Complemented by Login and reset, these are accessible as long as there is a user registered
